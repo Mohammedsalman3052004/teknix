@@ -12,6 +12,17 @@
         rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script type="module">
+        // This ensures Firebase modules are loaded and available
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js';
+        
+        // Make Firebase available globally
+        window.Firebase = {
+            initializeApp,
+            getFirestore
+        };
+    </script>
 </head>
 
 <body>
@@ -26,12 +37,12 @@
                 </div>
 
                 <div class="navbar-actions">
-                    <a href="" class="nav-links">ABOUT</a>
+                    <!-- <a href="" class="nav-links">ABOUT</a> -->
                     <a href="" class="nav-links">ELEVATORS</a>
-                    <a href="" class="nav-links">ESCALATORS</a>
-                    <a href="" class="nav-links">SERVICES</a>
-                    <a href="" class="nav-links">EXPERIENCE CENTRE</a>
-                    <a href="" class="nav-links">BLOG</a>
+                    <!-- <a href="" class="nav-links">ESCALATORS</a> -->
+                    <!-- <a href="" class="nav-links">SERVICES</a> -->
+                    <!-- <a href="" class="nav-links">EXPERIENCE CENTRE</a> -->
+                    <!-- <a href="" class="nav-links">BLOG</a> -->
                     <a href="" class="nav-links">CONTACT</a>
                 </div>
 
@@ -46,12 +57,12 @@
         <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
         <div class="mobile-menu" id="mobileMenu">
-            <a href="" class="mobile-nav-links">ABOUT</a>
+            <!-- <a href="" class="mobile-nav-links">ABOUT</a> -->
             <a href="" class="mobile-nav-links">ELEVATORS</a>
-            <a href="" class="mobile-nav-links">ESCALATORS</a>
-            <a href="" class="mobile-nav-links">SERVICES</a>
-            <a href="" class="mobile-nav-links">EXPERIENCE CENTRE</a>
-            <a href="" class="mobile-nav-links">BLOG</a>
+            <!-- <a href="" class="mobile-nav-links">ESCALATORS</a> -->
+            <!-- <a href="" class="mobile-nav-links">SERVICES</a> -->
+            <!-- <a href="" class="mobile-nav-links">EXPERIENCE CENTRE</a> -->
+            <!-- <a href="" class="mobile-nav-links">BLOG</a> -->
             <a href="" class="mobile-nav-links">CONTACT</a>
         </div>
 
@@ -469,6 +480,12 @@
                                 <span class="contact-value">+91 91414 13435</span>
                             </div>
                         </div>
+                        <div class="social-media-icons">
+                            <img src="./icons/facebook-icon.png" alt="" class="social-media">
+                            <img src="./icons/instagram-icon.png" alt="" class="social-media">
+                            <img src="./icons/linkedin-icon.png" alt="" class="social-media">
+                            <img src="./icons/x-icon.png" alt="" class="social-media">
+                        </div>
                     </div>
 
                     <!-- Right Side - Contact Form -->
@@ -549,8 +566,9 @@
 
                             <textarea class="form-textarea" placeholder="Additional requirements..."
                                 name="message"></textarea>
-
-                            <button type="submit" class="submit-btn">Submit</button>
+                            <div class="form-submit-ctc">
+                                <button type="submit" class="submit-btn">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -659,8 +677,9 @@
                         </div>
 
                         <textarea class="form-textarea" placeholder="Additional requirements..." name="message"></textarea>
-
-                        <button type="submit" class="submit-btn">Submit</button>
+                        <div class="form-submit-ctc">
+                            <button type="submit" class="submit-btn">Submit</button>
+                        </div>
                     </form>
                 </div>
             </div>

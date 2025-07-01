@@ -513,3 +513,530 @@ let modalShown = false;
                 }, 2000); // Close sooner on mobile
             };
         }
+
+
+
+
+
+
+// ==================================================
+// FIREBASE CLOUD STORAGE - COMPLETE SOLUTION
+// ==================================================
+
+// Firebase configuration (using your provided config)
+const firebaseConfig = {
+    apiKey: "AIzaSyARxBMyoWgBO5EPJVmNbtv_YzCVvsWrVzc",
+    authDomain: "peknix.firebaseapp.com",
+    projectId: "peknix",
+    storageBucket: "peknix.firebasestorage.app",
+    messagingSenderId: "765710336493",
+    appId: "1:765710336493:web:2e98190d75fca3922aa7e4",
+    measurementId: "G-ZT50HR07KV"
+};
+
+// Initialize Firebase
+let db;
+let isFirebaseInitialized = false;
+
+async function initializeFirebase() {
+    try {
+        // Import Firebase modules
+        const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js');
+        const { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, orderBy, query } = await import('https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js');
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        
+        // Store Firebase functions globally for use
+        window.firebaseHelpers = {
+            collection,
+            addDoc,
+            getDocs,
+            deleteDoc,
+            doc,
+            orderBy,
+            query
+        };
+        
+        isFirebaseInitialized = true;
+        console.log('Firebase initialized successfully');
+        
+    } catch (error) {
+        console.error('Error initializing Firebase:', error);
+        alert('Error connecting to cloud storage. Please try again later.');
+    }
+}
+
+// ==================================================
+// FORM SUBMISSION FUNCTION
+// ==================================================
+
+async function submitForm(event) {
+    event.preventDefault();
+    
+    // Show loading state
+    const submitBtn = event.target.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+    
+    try {
+        // Initialize Firebase if not already done
+        if (!isFirebaseInitialized) {
+            await initializeFirebase();
+        }
+        
+        // Get form data
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries());
+        
+        // Add metadata
+        data.timestamp = new Date().toISOString();
+        data.id = Date.now().toString();
+        data.submissionDate = new Date().toLocaleDateString();
+        data.submissionTime = new Date().toLocaleTimeString();
+        
+        // Validate required fields
+        const requiredFields = ['name', 'phone', 'email', 'floors', 'construction', 'location', 'budget', 'plan'];
+        const missingFields = requiredFields.filter(field => !data[field]);
+        
+        if (missingFields.length > 0) {
+            throw new Error(`Please fill in all required fields: ${missingFields.join(', ')}`);
+        }
+        
+        // Save to Firestore
+        const { collection, addDoc } = window.firebaseHelpers;
+        const docRef = await addDoc(collection(db, "form-submissions"), data);
+        
+        console.log("Document written with ID: ", docRef.id);
+        
+        // Show success message
+        const successMessage = document.getElementById('successMessage');
+        successMessage.classList.add('show');
+        
+        // Reset form
+        event.target.reset();
+        
+        // Hide modal after 2 seconds
+        setTimeout(() => {
+            closeModal();
+            successMessage.classList.remove('show');
+        }, 2000);
+        
+        console.log('Form submitted successfully:', data);
+        
+    } catch (error) {
+        console.error("Error submitting form: ", error);
+        alert('There was an error submitting the form: ' + error.message);
+    } finally {
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+}
+
+// ==================================================
+// ADMIN FUNCTIONS FOR VIEWING DATA
+// ==================================================
+
+async function viewAllSubmissions() {
+    try {
+        if (!isFirebaseInitialized) {
+            await initializeFirebase();
+        }
+        
+        const { collection, getDocs, query, orderBy } = window.firebaseHelpers;
+        const q = query(collection(db, "form-submissions"), orderBy("timestamp", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        const submissions = [];
+        querySnapshot.forEach((doc) => {
+            submissions.push({
+                firebaseId: doc.id,
+                ...doc.data()
+            });
+        });
+        
+        console.table(submissions);
+        return submissions;
+        
+    } catch (error) {
+        console.error('Error fetching submissions:', error);
+        alert('Error fetching data from cloud storage');
+        return [];
+    }
+}
+
+// ==================================================
+// EXPORT TO CSV FUNCTION
+// ==================================================
+
+async function exportToCSV() {
+    try {
+        const submissions = await viewAllSubmissions();
+        
+        if (submissions.length === 0) {
+            alert('No data to export');
+            return;
+        }
+        
+        // Define headers in desired order
+        const headers = [
+            'timestamp',
+            'submissionDate', 
+            'submissionTime',
+            'name',
+            'phone',
+            'email',
+            'floors',
+            'construction',
+            'location',
+            'budget',
+            'plan',
+            'message'
+        ];
+        
+        const csvContent = [
+            headers.join(','),
+            ...submissions.map(row => 
+                headers.map(field => `"${(row[field] || '').toString().replace(/"/g, '""')}"`).join(',')
+            )
+        ].join('\n');
+        
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `teknix-form-submissions-${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+        
+        console.log('CSV export completed');
+        
+    } catch (error) {
+        console.error('Error exporting CSV:', error);
+        alert('Error exporting data');
+    }
+}
+
+// ==================================================
+// DELETE SUBMISSION FUNCTION
+// ==================================================
+
+async function deleteSubmission(firebaseId) {
+    try {
+        if (!confirm('Are you sure you want to delete this submission?')) {
+            return;
+        }
+        
+        if (!isFirebaseInitialized) {
+            await initializeFirebase();
+        }
+        
+        const { doc, deleteDoc } = window.firebaseHelpers;
+        await deleteDoc(doc(db, "form-submissions", firebaseId));
+        
+        console.log('Submission deleted successfully');
+        alert('Submission deleted successfully');
+        
+        // Refresh the admin panel if it's open
+        if (document.querySelector('.admin-modal')) {
+            showAdminPanel();
+        }
+        
+    } catch (error) {
+        console.error('Error deleting submission:', error);
+        alert('Error deleting submission');
+    }
+}
+
+// ==================================================
+// MODAL FUNCTIONS
+// ==================================================
+
+function openModal() {
+    const modal = document.getElementById('modalOverlay');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    const modal = document.getElementById('modalOverlay');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    
+    // Reset form
+    const form = document.getElementById('contactForm');
+    if (form) form.reset();
+    
+    // Hide success message
+    const successMessage = document.getElementById('successMessage');
+    if (successMessage) successMessage.classList.remove('show');
+}
+
+// ==================================================
+// ADMIN PANEL
+// ==================================================
+
+async function showAdminPanel() {
+    try {
+        const submissions = await viewAllSubmissions();
+        
+        // Remove existing admin modal
+        const existingModal = document.querySelector('.admin-modal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+        
+        // Create admin modal
+        const adminModal = document.createElement('div');
+        adminModal.className = 'admin-modal';
+        adminModal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        `;
+        
+        const adminContent = document.createElement('div');
+        adminContent.style.cssText = `
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 95%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+        `;
+        
+        let html = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>Form Submissions (${submissions.length})</h2>
+                <button onclick="this.closest('.admin-modal').remove()" style="background: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">✕ Close</button>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <button onclick="exportToCSV()" style="padding: 10px 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">📊 Export CSV</button>
+                <button onclick="showAdminPanel()" style="padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">🔄 Refresh</button>
+            </div>
+        `;
+        
+        if (submissions.length === 0) {
+            html += '<p style="text-align: center; color: #666; padding: 40px;">No submissions found.</p>';
+        } else {
+            html += `
+                <div style="overflow-x: auto;">
+                    <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                        <thead>
+                            <tr style="background: #f8f9fa;">
+                                <th>Date & Time</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Floors</th>
+                                <th>Construction</th>
+                                <th>Location</th>
+                                <th>Budget</th>
+                                <th>Plan</th>
+                                <th>Message</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            submissions.forEach(sub => {
+                const date = new Date(sub.timestamp).toLocaleString();
+                html += `
+                    <tr>
+                        <td style="white-space: nowrap;">${date}</td>
+                        <td>${sub.name || ''}</td>
+                        <td>${sub.phone || ''}</td>
+                        <td style="word-break: break-all;">${sub.email || ''}</td>
+                        <td>${sub.floors || ''}</td>
+                        <td>${sub.construction || ''}</td>
+                        <td>${sub.location || ''}</td>
+                        <td>${sub.budget || ''}</td>
+                        <td>${sub.plan || ''}</td>
+                        <td style="max-width: 200px; word-wrap: break-word;">${(sub.message || '').substring(0, 100)}${(sub.message && sub.message.length > 100) ? '...' : ''}</td>
+                        <td style="white-space: nowrap;">
+                            <button onclick="deleteSubmission('${sub.firebaseId}')" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 12px;">🗑️ Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+        
+        adminContent.innerHTML = html;
+        adminModal.appendChild(adminContent);
+        document.body.appendChild(adminModal);
+        
+        // Close modal when clicking outside
+        adminModal.addEventListener('click', function(e) {
+            if (e.target === adminModal) {
+                adminModal.remove();
+            }
+        });
+        
+    } catch (error) {
+        console.error('Error showing admin panel:', error);
+        alert('Error loading admin panel');
+    }
+}
+
+function createAdminPanel() {
+    const adminButton = document.createElement('button');
+    adminButton.textContent = '👨‍💼 Admin Panel';
+    adminButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 10000;
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        transition: all 0.3s ease;
+    `;
+    
+    adminButton.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px)';
+        this.style.boxShadow = '0 6px 20px rgba(220, 53, 69, 0.4)';
+    });
+    
+    adminButton.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = '0 4px 15px rgba(220, 53, 69, 0.3)';
+    });
+    
+    adminButton.addEventListener('click', showAdminPanel);
+    
+    document.body.appendChild(adminButton);
+}
+
+// ==================================================
+// EVENT LISTENERS AND INITIALIZATION
+// ==================================================
+
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('Initializing Teknix Form System...');
+    
+    // Initialize Firebase
+    await initializeFirebase();
+    
+    // Setup download button event listeners
+    const downloadBtns = document.querySelectorAll('.download-btn');
+    downloadBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+    });
+    
+    // Close modal when clicking outside
+    const modalOverlay = document.getElementById('modalOverlay');
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+    }
+    
+    // Create admin panel button (remove this line in production)
+    createAdminPanel();
+    
+    console.log('Teknix Form System initialized successfully');
+});
+
+// ==================================================
+// UTILITY FUNCTIONS
+// ==================================================
+
+// Function to get submission statistics
+async function getSubmissionStats() {
+    try {
+        const submissions = await viewAllSubmissions();
+        
+        const today = new Date().toDateString();
+        const thisWeek = new Date();
+        thisWeek.setDate(thisWeek.getDate() - 7);
+        const thisMonth = new Date();
+        thisMonth.setDate(1);
+        
+        const stats = {
+            total: submissions.length,
+            today: submissions.filter(sub => new Date(sub.timestamp).toDateString() === today).length,
+            thisWeek: submissions.filter(sub => new Date(sub.timestamp) >= thisWeek).length,
+            thisMonth: submissions.filter(sub => new Date(sub.timestamp) >= thisMonth).length
+        };
+        
+        console.log('Submission Statistics:', stats);
+        return stats;
+        
+    } catch (error) {
+        console.error('Error getting stats:', error);
+        return { total: 0, today: 0, thisWeek: 0, thisMonth: 0 };
+    }
+}
+
+// Function to backup data
+async function backupData() {
+    try {
+        const submissions = await viewAllSubmissions();
+        const backup = {
+            timestamp: new Date().toISOString(),
+            count: submissions.length,
+            data: submissions
+        };
+        
+        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `teknix-backup-${new Date().toISOString().split('T')[0]}.json`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+        
+        console.log('Backup completed');
+        
+    } catch (error) {
+        console.error('Error creating backup:', error);
+        alert('Error creating backup');
+    }
+}
+
+// ==================================================
+// GLOBAL FUNCTIONS (for console access)
+// ==================================================
+
+// Make functions available globally for testing
+window.teknixAdmin = {
+    viewAllSubmissions,
+    exportToCSV,
+    getSubmissionStats,
+    backupData,
+    showAdminPanel,
+    deleteSubmission
+};
+
+console.log('Teknix Admin functions available at: window.teknixAdmin');

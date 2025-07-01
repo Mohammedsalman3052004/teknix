@@ -5405,3 +5405,199 @@ padding: 0 25px
   margin-bottom: 1rem;
   margin-top: -2rem;
 }
+
+
+.social-media-icons{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.social-media{
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+.form-submit-ctc{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+/* Modal Container - Reduced height */
+.modal-container {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px; /* Reduced from 600px */
+  max-height: 80vh; /* Reduced from 90vh */
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.8) translateY(50px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Contact Form Section - Reduced padding */
+.contact-form-section {
+  padding: 30px 25px; /* Reduced from 50px 40px */
+  background: white;
+  border-radius: 12px;
+}
+
+/* Teknix Logo - Reduced margins */
+.teknix-logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem; /* Reduced from 1rem */
+  margin-top: -1rem; /* Reduced from -2rem */
+}
+
+/* Form Title - Reduced size and margin */
+.form-title {
+  font-size: 22px; /* Reduced from 28px */
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px; /* Reduced from 30px */
+}
+
+/* Contact Form - Reduced gap */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Reduced from 15px */
+}
+
+/* Form Row - Reduced gap */
+.form-row {
+  display: flex;
+  gap: 10px; /* Reduced from 15px */
+}
+
+/* Form Inputs - Reduced padding */
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 10px 12px; /* Reduced from 15px */
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 13px; /* Reduced from 14px */
+  font-family: 'Inter', sans-serif;
+  background: white;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Form Textarea - Reduced padding and height */
+.form-textarea {
+  width: 100%;
+  padding: 10px 12px; /* Reduced from 15px */
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 13px; /* Reduced from 14px */
+  font-family: 'Inter', sans-serif;
+  background: white;
+  outline: none;
+  resize: vertical;
+  min-height: 70px; /* Reduced from 100px */
+  transition: all 0.3s ease;
+}
+
+/* Submit Button - Reduced padding */
+.submit-btn {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+  padding: 12px 25px; /* Reduced from 15px 30px */
+  border: none;
+  border-radius: 8px;
+  font-size: 14px; /* Reduced from 16px */
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: 8px; /* Reduced from 10px */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+/* Social Media Icons - Reduced margin */
+.social-media-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem; /* Reduced from 2rem */
+}
+
+/* Mobile Responsiveness - Adjusted for smaller size */
+@media (max-width: 768px) {
+  .modal-container {
+    max-width: 90%;
+    max-height: 85vh;
+    margin: 10px;
+  }
+
+  .contact-form-section {
+    padding: 25px 20px; /* Reduced */
+  }
+
+  .form-title {
+    font-size: 20px; /* Reduced */
+    margin-bottom: 15px; /* Reduced */
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 8px; /* Reduced */
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 8px 10px; /* Reduced */
+    font-size: 12px; /* Reduced */
+  }
+
+  .form-textarea {
+    min-height: 60px; /* Reduced */
+  }
+
+  .submit-btn {
+    align-self: stretch;
+    padding: 10px; /* Reduced */
+    font-size: 13px; /* Reduced */
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-section {
+    padding: 20px 15px; /* Reduced */
+  }
+
+  .form-title {
+    font-size: 18px; /* Reduced */
+    margin-bottom: 12px; /* Reduced */
+  }
+
+  .contact-form {
+    gap: 8px; /* Reduced */
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .form-textarea {
+    min-height: 50px; /* Reduced */
+  }
+}
