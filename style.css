@@ -2965,6 +2965,7 @@
   color: #cccccc;
   line-height: 1.6;
   max-width: 280px;
+  font-family: inter;
 }
 
 /* Custom icons using SVG */
@@ -3064,6 +3065,7 @@ text-transform: capitalize;
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-family: inter;
 }
 .corporate-profile-subtitle p{
   color: #212529;
@@ -3950,6 +3952,7 @@ line-height: 1.8125rem;
   font-size: 15px;
   line-height: 1.5;
   margin-bottom: 30px;
+  font-family: inter;
 }
 
 .contact-details {
@@ -3966,10 +3969,12 @@ line-height: 1.8125rem;
   font-weight: 600;
   display: inline-block;
   width: 60px;
+  font-family: inter;
 }
 
 .contact-value {
   color: #333;
+  font-family: inter;
 }
 
 .contact-form-section {
@@ -3982,6 +3987,7 @@ line-height: 1.8125rem;
   color: #333;
   text-align: center;
   margin-bottom: 30px;
+  font-family: inter;
 }
 
 .contact-form {
@@ -4010,6 +4016,7 @@ line-height: 1.8125rem;
   background: white;
   outline: none;
   transition: border-color 0.3s ease;
+  font-family: inter;
 }
 
 .form-input:focus,
@@ -4045,6 +4052,7 @@ line-height: 1.8125rem;
   resize: vertical;
   min-height: 100px;
   transition: border-color 0.3s ease;
+  font-family: inter;
 }
 
 .form-textarea:focus {
