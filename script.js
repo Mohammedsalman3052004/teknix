@@ -381,3 +381,135 @@ gsap.fromTo('.testimonial-card.active',
         delay: 0.6
     }
 );
+
+
+
+
+
+let modalShown = false;
+        let autoShowTimer;
+
+        // Auto-show modal after 5 seconds
+        function autoShowModal() {
+            autoShowTimer = setTimeout(() => {
+                if (!modalShown) {
+                    openModal();
+                }
+            }, 5000);
+        }
+
+        // Open modal function
+        function openModal() {
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            modalShown = true;
+            
+            // Clear the auto-show timer if modal is opened manually
+            if (autoShowTimer) {
+                clearTimeout(autoShowTimer);
+            }
+        }
+
+        // Close modal function
+        function closeModal() {
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Form submission
+        function submitForm(event) {
+            event.preventDefault();
+            
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            // Reset form
+            const form = document.getElementById('contactForm');
+            form.reset();
+            
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+            
+            // Close modal after 4 seconds
+            setTimeout(() => {
+                closeModal();
+            }, 4000);
+        }
+
+        // Prevent modal from auto-showing if user has already interacted
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user has previously seen the modal (using localStorage)
+            const hasSeenModal = localStorage.getItem('teknixModalSeen');
+            
+            if (!hasSeenModal) {
+                autoShowModal();
+            }
+        });
+
+        // Store that user has seen the modal
+        function markModalAsSeen() {
+            localStorage.setItem('teknixModalSeen', 'true');
+        }
+
+        // Add event listeners to download buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadBtns = document.querySelectorAll('.download-btn');
+            downloadBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    openModal();
+                    markModalAsSeen();
+                });
+            });
+        });
+
+        // Smooth scrolling for mobile
+        function preventScrollChaining(e) {
+            const container = document.getElementById('modalContainer');
+            const scrollTop = container.scrollTop;
+            const scrollHeight = container.scrollHeight;
+            const height = container.clientHeight;
+            const wheelDelta = e.deltaY;
+            const isDeltaPositive = wheelDelta > 0;
+
+            if (isDeltaPositive && scrollTop + height >= scrollHeight) {
+                e.preventDefault();
+            } else if (!isDeltaPositive && scrollTop <= 0) {
+                e.preventDefault();
+            }
+        }
+
+        // Add touch and wheel event listeners for better mobile experience
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalContainer = document.getElementById('modalContainer');
+            modalContainer.addEventListener('wheel', preventScrollChaining, { passive: false });
+        });
+
+        // Auto-hide modal on mobile after form submission
+        if (window.innerWidth <= 768) {
+            const originalSubmitForm = submitForm;
+            submitForm = function(event) {
+                originalSubmitForm(event);
+                setTimeout(() => {
+                    closeModal();
+                }, 2000); // Close sooner on mobile
+            };
+        }

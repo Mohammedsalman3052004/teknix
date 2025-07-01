@@ -3432,6 +3432,7 @@ line-height: 1.8125rem;
   max-width: 450px;
   display: flex;
   justify-content: center;
+  margin-top: 4rem;
 }
 
 .testimonials-container {
@@ -4952,4 +4953,455 @@ padding: 0 25px
     font-size: 9px;
     margin-top: 5px;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Demo content for testing */
+.demo-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.demo-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.demo-content p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+/* Download Brochure Button */
+.download-btn {
+  background: #dc3545;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  margin: 10px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.download-btn:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+  color: white;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Container */
+.modal-container {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.8) translateY(50px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modal-overlay.active .modal-container {
+  transform: scale(1) translateY(0);
+}
+
+/* Close Button */
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #f8f9fa;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  transition: all 0.3s ease;
+  color: #666;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.modal-close:hover {
+  background: #e9ecef;
+  color: #333;
+  transform: rotate(90deg);
+}
+
+/* Modal Content */
+.modal-content {
+  display: block;
+  min-height: auto;
+}
+
+/* Left Side - Company Info */
+.company-info {
+  flex: 1;
+  /* background: linear-gradient(135deg, #333 0%, #555 100%); */
+  color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.company-info::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  transform: rotate(45deg);
+}
+
+.company-info-content {
+  position: relative;
+  z-index: 2;
+}
+
+.company-logo {
+  margin-bottom: 30px;
+}
+
+.company-logo h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.company-logo p {
+  font-size: 12px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.company-address {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  opacity: 0.9;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.contact-label {
+  font-weight: 600;
+  min-width: 60px;
+}
+
+/* Contact Form Section */
+.contact-form-section {
+  padding: 50px 40px;
+  background: white;
+  border-radius: 12px;
+}
+
+.form-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  background: white;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.form-input::placeholder {
+  color: #999;
+  font-size: 14px;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23999' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 15px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 45px;
+  color: #666;
+  cursor: pointer;
+}
+
+.form-select option {
+  padding: 10px;
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  background: white;
+  outline: none;
+  resize: vertical;
+  min-height: 100px;
+  transition: all 0.3s ease;
+}
+
+.form-textarea:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+  transition: all 0.3s ease;
+  /* color: white; */
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .modal-container {
+      max-width: 95%;
+      max-height: 95vh;
+      margin: 10px;
+  }
+
+  .contact-form-section {
+      padding: 40px 30px;
+  }
+
+  .form-title {
+      font-size: 24px;
+      margin-bottom: 25px;
+  }
+
+  .form-row {
+      flex-direction: column;
+      gap: 15px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+      padding: 12px 15px;
+  }
+
+  .submit-btn {
+      align-self: stretch;
+      padding: 15px;
+  }
+
+  .modal-close {
+      top: 15px;
+      right: 15px;
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-overlay {
+      padding: 10px;
+  }
+
+  .contact-form-section {
+      padding: 35px 25px;
+  }
+
+  .form-title {
+      font-size: 22px;
+      margin-bottom: 20px;
+  }
+
+  .contact-form {
+      gap: 12px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+      padding: 10px 12px;
+      font-size: 13px;
+  }
+
+  .form-textarea {
+      min-height: 80px;
+  }
+}
+
+/* Animation for popup entrance */
+@keyframes slideInUp {
+  from {
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+  }
+}
+
+.modal-overlay.active .modal-container {
+  animation: slideInUp 0.4s ease-out;
+}
+
+/* Success message */
+.success-message {
+  background: #28a745;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.success-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth scrollbar for modal */
+.modal-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.modal-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.teknix-logo{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-top: -2rem;
 }
