@@ -204,20 +204,25 @@ class TestimonialsCarousel {
             }
         });
 
-        // Wheel event for desktop scroll
+        // Wheel event for desktop scroll - only prevent default when over cards
         this.swipeArea.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            if (this.isAnimating) return;
-            
-            this.stopAutoRotate();
-            
-            if (e.deltaY > 0) {
-                this.nextTestimonial();
-            } else {
-                this.prevTestimonial();
+            // Check if mouse is directly over a testimonial card
+            const target = e.target.closest('.testimonial-card');
+            if (target) {
+                e.preventDefault();
+                if (this.isAnimating) return;
+                
+                this.stopAutoRotate();
+                
+                if (e.deltaY > 0) {
+                    this.nextTestimonial();
+                } else {
+                    this.prevTestimonial();
+                }
+                
+                this.startAutoRotate();
             }
-            
-            this.startAutoRotate();
+            // If not over a card, allow normal page scrolling
         }, { passive: false });
 
         // Keyboard navigation

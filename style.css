@@ -866,7 +866,7 @@
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.3s ease 0.1s;
-  max-width: 250px;
+  max-width: 350px;
   line-height: 1.5;
   font-family: inter;
 }
@@ -1166,7 +1166,7 @@
   
   .vision-description {
     font-size: 0.8rem;
-    max-width: 200px;
+    max-width: 220px;
     margin-top: 0.8rem;
   }
 }
@@ -1216,7 +1216,7 @@
   
   .vision-description {
     font-size: 0.75rem;
-    max-width: 180px;
+    max-width: 220px;
     margin-top: 0.7rem;
   }
 }
