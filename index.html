@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+
+<body>
+    <div class="main">
+
+        <!-- Navbar -->
+
+        <nav class="navbar" id="navbar">
+            <div class="navbar-container">
+                <div class="navbar__logo">
+                    <img src="./icons/footer-logo.png" alt="" class="navbar-logo-icon">
+                </div>
+
+                <div class="navbar-actions">
+                    <a href="" class="nav-links">ABOUT</a>
+                    <a href="" class="nav-links">ELEVATORS</a>
+                    <a href="" class="nav-links">ESCALATORS</a>
+                    <a href="" class="nav-links">SERVICES</a>
+                    <a href="" class="nav-links">EXPERIENCE CENTRE</a>
+                    <a href="" class="nav-links">BLOG</a>
+                    <a href="" class="nav-links">CONTACT</a>
+                </div>
+
+                <div class="hamburger" id="hamburger">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="" class="mobile-nav-links">ABOUT</a>
+            <a href="" class="mobile-nav-links">ELEVATORS</a>
+            <a href="" class="mobile-nav-links">ESCALATORS</a>
+            <a href="" class="mobile-nav-links">SERVICES</a>
+            <a href="" class="mobile-nav-links">EXPERIENCE CENTRE</a>
+            <a href="" class="mobile-nav-links">BLOG</a>
+            <a href="" class="mobile-nav-links">CONTACT</a>
+        </div>
+
+        <!-- Hero Section -->
+
+        <section class="hero-section">
+            <img src="./icons/hero-banner.png" alt="hero banner" class="hero-banner">
+            <div class="hero-content">
+                <div class="hero-heading">
+                    <p class="hero-para">Smarter. Safer. Smoother</p>
+                    <h1 class="hero-title">Elevating the Future of Vertical Transportation</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teknix vision section -->
+
+        <section class="teknix-vision-section">
+            <div class="teknix-vision-heading-wrapper">
+                <div class="teknix-vision-heading">
+                    <h4 class="teknix-vision-para">Welcome to TEKNIX ELEVATORS</h4>
+                    <h1 class="teknix-vision-title">Unparalleled passion.<br> Unmatched results.</h1>
+                    <p class="teknix-vision-subtitle">where cutting-edge technology meets world-class engineering to
+                        deliver elevator solutions that move people — and possibilities — upward.</p>
+                </div>
+            </div>
+            <div class="teknix-vision-images-wrapper">
+                <div class="vision-card teknix-vision-images1">
+                    <div class="vision-content">
+                        <h2 class="teknix-vision-images-title">Quality Excellence</h2>
+                        <p class="vision-description">Precision engineering and meticulous attention to detail in every
+                            component</p>
+                    </div>
+                </div>
+
+                <div class="vision-card teknix-vision-images2">
+                    <div class="vision-content">
+                        <h2 class="teknix-vision-images-title">Safety & Reliability</h2>
+                        <p class="vision-description">Industry-leading safety standards with proven reliability you can
+                            trust</p>
+                    </div>
+                </div>
+
+                <div class="vision-card teknix-vision-images3">
+                    <div class="vision-content">
+                        <h2 class="teknix-vision-images-title">Innovative Thinking</h2>
+                        <p class="vision-description">Pioneering solutions that push the boundaries of what's possible
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Elevator Showcase -->
+
+        <section class="elevator-showcase">
+            <div class="container">
+                <div class="showcase-wrapper">
+                    <!-- Left Section -->
+                    <div class="left-section">
+                        <div class="section-label">OUR BEST ELEVATORS</div>
+
+                        <ul class="elevator-list">
+                            <li class="elevator-item active" data-elevator="optima">
+                                <h2 class="elevator-name">Optima</h2>
+                            </li>
+                            <li class="elevator-item" data-elevator="vertix">
+                                <h2 class="elevator-name">Vertix</h2>
+                            </li>
+                            <li class="elevator-item" data-elevator="greentek">
+                                <h2 class="elevator-name">Greentek</h2>
+                            </li>
+                            <li class="elevator-item" data-elevator="hydratek">
+                                <h2 class="elevator-name">Hydratek</h2>
+                            </li>
+                            <li class="elevator-item" data-elevator="villamatek">
+                                <h2 class="elevator-name">Villa matek</h2>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right Section -->
+                    <div class="right-section">
+                        <div class="navigation-arrows">
+                            <button class="arrow-btn" id="prevBtn">‹</button>
+                            <button class="arrow-btn" id="nextBtn">›</button>
+                        </div>
+
+                        <div class="content-area">
+                            <div class="elevator-description">
+                                The all new OPTIMA redefines simplicity giving you vertical mobility solution with a
+                                range of technologically advanced features with German craftsmanship at its heart.
+                            </div>
+
+                            <div class="elevator-image-container">
+                                <div class="elevator-image optima" id="elevatorImage"></div>
+                            </div>
+
+                            <div class="download-section">
+                                <a href="#" class="download-btn">DOWNLOAD BROCHURE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+
+        <section class="features-section">
+            <div class="features-heading">
+                <h1 class="feature-title">Features</h1>
+            </div>
+
+            <div class="features-wrapper">
+                <div class="features-container">
+                    <div class="feature-icon-bg">
+                        <img src="./icons/feature1.svg" alt="Spacious Car">
+                    </div>
+                    <p class="features-container-title">Spacious Car</p>
+                </div>
+
+                <div class="features-container">
+                    <div class="feature-icon-bg">
+                        <img src="./icons/feature2.svg" alt="Power Saver">
+                    </div>
+                    <p class="features-container-title">Power Saver</p>
+                </div>
+
+                <div class="features-container">
+                    <div class="feature-icon-bg">
+                        <img src="./icons/feature3.svg" alt="Door Sensors">
+                    </div>
+                    <p class="features-container-title">Door Sensors</p>
+                </div>
+
+                <div class="features-container">
+                    <div class="feature-icon-bg">
+                        <img src="./icons/feature4.svg" alt="Smooth & Silent">
+                    </div>
+                    <p class="features-container-title">Smooth & Silent operations</p>
+                </div>
+
+                <div class="features-container">
+                    <div class="feature-icon-bg">
+                        <img src="./icons/feature5.svg" alt="Earthquake Protection">
+                    </div>
+                    <p class="features-container-title">Earthquake Protection System</p>
+                </div>
+
+                <div class="features-container">
+                    <div class="feature-icon-bg">
+                        <img src="./icons/feature6.svg" alt="Wide Range">
+                    </div>
+                    <p class="features-container-title">Wide Range</p>
+                </div>
+
+                <div class="features-container">
+                    <div class="feature-icon-bg">
+                        <img src="./icons/feature7.svg" alt="Anti Squeeze Door">
+                    </div>
+                    <p class="features-container-title">Anti Squeeze Door System</p>
+                </div>
+
+                <div class="features-container">
+                    <div class="feature-icon-bg">
+                        <img src="./icons/feature8.svg" alt="Light Curtains">
+                    </div>
+                    <p class="features-container-title">Light Curtains</p>
+                </div>
+
+                <div class="features-container">
+                    <div class="feature-icon-bg">
+                        <img src="./icons/feature9.svg" alt="Dual Rescue Disc Brakes">
+                    </div>
+                    <p class="features-container-title">Dual rescue disc brakes</p>
+                </div>
+
+                <div class="features-container">
+                    <div class="feature-icon-bg">
+                        <img src="./icons/feature10.svg" alt="Teknix Rescue Device">
+                    </div>
+                    <p class="features-container-title">Teknix rescue device</p>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <a href="#" class="download-btn">DOWNLOAD BROCHURE</a>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+
+        <section class="why-choose-section">
+            <div class="container">
+                <h2 class="section-title">Why Choose US</h2>
+
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="icon-container">
+                            <img src="./icons/whychooseus1.svg" alt="">
+                        </div>
+                        <h3 class="whychooseus-title">Quality</h3>
+                        <p class="feature-description">
+                            The first thing that anyone notices about our superior products is the attention to detail.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="icon-container">
+                            <img src="./icons/whychooseus2.svg" alt="">
+                        </div>
+                        <h3 class="whychooseus-title">Safety</h3>
+                        <p class="feature-description">
+                            With our uncompromising approach and cutting-edge technology, we ensure its safety in every
+                            way.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="icon-container">
+                            <img src="./icons/whychooseus3.svg" alt="">
+                        </div>
+                        <h3 class="whychooseus-title">Reliability</h3>
+                        <p class="feature-description">
+                            Each product goes through many levels of rigorous testing to meet our high safety standards.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="icon-container">
+                            <img src="./icons/whychooseus4.svg" alt="">
+                        </div>
+                        <h3 class="whychooseus-title">Wide Range</h3>
+                        <p class="feature-description">
+                            We have a wide range of elevators to pick from that best suits your style and requirements.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="icon-container">
+                            <img src="./icons/whychooseus5.svg" alt="">
+                        </div>
+                        <h3 class="whychooseus-title">Innovation</h3>
+                        <p class="feature-description">
+                            To bring your imagination to life, we've hand-picked a team of innovative, brilliant
+                            engineers.
+                        </p>
+                    </div>
+                </div>
+                <div class="center-bg-color">salman</div>
+
+            </div>
+        </section>
+
+        <!-- Corporate Profile -->
+
+        <section class="corporate-profile-section">
+            <div class="corporate-profile-content">
+                <div class="corporate-profile-title">
+                    <h1>Corporate Profile</h1>
+                </div>
+                <div class="corporate-porfile-subtitle">
+                    <p>Teknix is an ISO 9001-2008 certified company. Teknix began with a simple concept: to achieve
+                        excellence in field ofvertical transportation. Since three decades in the field of installation,
+                        modernization and maintenance of elevators. Teknix Elevators Pvt. Ltd. Management team brings
+                        deep expertise in the field of vertical transport technology.</p>
+                    <p>Every product, whether custom-built to client specifications or part of a larger vertical
+                        Transportation line, is subject to stringent testing by our in- house R&D. Our commitment and
+                        dedication to give our customers a superior and reliable product with Excellent quality and
+                        service.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial -->
+
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="testimonials-wrapper">
+                    <!-- Left Side -->
+                    <div class="testimonials-left">
+                        <div class="testimonials-label">TESTIMONIALS</div>
+                        <h1 class="testimonials-title">See Why Members Choose</h1>
+                        <h2 class="testimonials-subtitle">Teknix Elevators</h2>
+                    </div>
+    
+                    <!-- Right Side -->
+                    <div class="testimonials-right">
+                        <div class="testimonials-container">
+                            <div class="testimonial-card active" data-index="0">
+                                <div class="testimonial-content">
+                                    <h3 class="testimonial-name">joella aylan</h3>
+                                    <p class="testimonial-text">I entrusted MAGANADELUXE to sell my TAG Heuer, and the outcome was fantastic.</p>
+                                    <div class="rating">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                                <div class="quote-icon">"</div>
+                            </div>
+    
+                            <div class="testimonial-card next" data-index="1">
+                                <div class="testimonial-content">
+                                    <h3 class="testimonial-name">Michael Chen</h3>
+                                    <p class="testimonial-text">Outstanding elevator technology and professional installation service for our commercial building.</p>
+                                    <div class="rating">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                    </div>
+                                </div>
+                                <div class="quote-icon">"</div>
+                            </div>
+    
+                            <div class="testimonial-card hidden" data-index="2">
+                                <div class="testimonial-content">
+                                    <h3 class="testimonial-name">Sarah Johnson</h3>
+                                    <p class="testimonial-text">Reliable maintenance service and excellent customer support throughout the years.</p>
+                                    <div class="rating">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                                <div class="quote-icon">"</div>
+                            </div>
+    
+                            <div class="testimonial-card hidden" data-index="3">
+                                <div class="testimonial-content">
+                                    <h3 class="testimonial-name">Robert Kumar</h3>
+                                    <p class="testimonial-text">The best elevator company in the region. Their customer support is excellent and the products are top-notch quality.</p>
+                                    <div class="rating">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                    </div>
+                                </div>
+                                <div class="quote-icon">"</div>
+                            </div>
+    
+                            <div class="testimonial-card hidden" data-index="4">
+                                <div class="testimonial-content">
+                                    <h3 class="testimonial-name">Emily Davis</h3>
+                                    <p class="testimonial-text">Impressed with the energy-efficient elevators and the modern design. Perfect fit for our commercial building.</p>
+                                    <div class="rating">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                                <div class="quote-icon">"</div>
+                            </div>
+    
+                            <div class="swipe-area" id="swipeArea"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Us  -->
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <!-- Left Side - Company Information -->
+                    <div class="company-info">
+                        <div class="company-logo">
+                            <img src="./icons/footer-logo.png" alt="" class="footer-logo">
+                        </div>
+
+                        <div class="company-address">
+                            #125 Gala Square, 4th floor, R V Road,<br>
+                            V V Puram, Near Lalbagh West Gate<br>
+                            Bangalore-560004.
+                        </div>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="contact-label">Email:</span>
+                                <span class="contact-value">sales@teknixelevators.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-label">Phone:</span>
+                                <span class="contact-value">1800 1200 903</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side - Contact Form -->
+                    <div class="contact-form-section">
+                        <h2 class="form-title">Let Us Connect You</h2>
+
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" class="form-input" placeholder="Name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" class="form-input" placeholder="Phone" name="phone" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="email" class="form-input" placeholder="Email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-select" name="floors" required>
+                                        <option value="">No. of Floors</option>
+                                        <option value="1-3">1-3 Floors</option>
+                                        <option value="4-6">4-6 Floors</option>
+                                        <option value="7-10">7-10 Floors</option>
+                                        <option value="11-15">11-15 Floors</option>
+                                        <option value="15+">15+ Floors</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <select class="form-select" name="construction" required>
+                                        <option value="">Construction Type</option>
+                                        <option value="residential">Residential</option>
+                                        <option value="commercial">Commercial</option>
+                                        <option value="industrial">Industrial</option>
+                                        <option value="hospital">Hospital</option>
+                                        <option value="hotel">Hotel</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-select" name="location" required>
+                                        <option value="">Site Location</option>
+                                        <option value="bangalore">Bangalore</option>
+                                        <option value="mumbai">Mumbai</option>
+                                        <option value="delhi">Delhi</option>
+                                        <option value="chennai">Chennai</option>
+                                        <option value="hyderabad">Hyderabad</option>
+                                        <option value="pune">Pune</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <select class="form-select" name="budget" required>
+                                        <option value="">Select your budget</option>
+                                        <option value="5-10">₹5-10 Lakhs</option>
+                                        <option value="10-20">₹10-20 Lakhs</option>
+                                        <option value="20-50">₹20-50 Lakhs</option>
+                                        <option value="50+">₹50+ Lakhs</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-select" name="plan" required>
+                                        <option value="">Select your plan</option>
+                                        <option value="basic">Basic Plan</option>
+                                        <option value="standard">Standard Plan</option>
+                                        <option value="premium">Premium Plan</option>
+                                        <option value="luxury">Luxury Plan</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <textarea class="form-textarea" placeholder="Additional requirements..."
+                                name="message"></textarea>
+
+                            <button type="submit" class="submit-btn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="copyright-section">
+            <div class="copyright-content">
+                <p class="copyright-links border-right">Powered by <a href="#">Pinakkaa</a></p>
+                <p class="copyright-links border-right">Copyright © 2025</p>
+                <p class="copyright-links">Privacy Policy</p>
+            </div>
+        </section>
+
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>
